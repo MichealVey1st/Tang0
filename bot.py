@@ -8,16 +8,16 @@ import ffmpeg
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from discord.ext import tasks, commands
-
-# Add this next:
-# https://python.land/build-discord-bot-in-python-that-plays-music
+# imports all of depenancies 
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+# sets bot token to access the discord servers
 
 intents = discord.Intents().all()
 client = discord.Client()
 bot = commands.Bot(command_prefix='!',intents=intents)
+# defines the client and bots as well as set its intents to all because its a req to use if you want it in more than one server
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -34,11 +34,13 @@ ytdl_format_options = {
     'default_search': 'auto',
     'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
+# download settings might use for high quality audio
 
 FFMPEG_OPTIONS = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
     'options': '-vn'
 }
+# sets up youtube stream settings
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
@@ -47,27 +49,28 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="tango! help"))
     bot_info = await client.application_info()
-    # print(bot_info)
+    # When it connects to discord it sets the bots status and prints that it has connected in the console
 
 
 @client.event
 async def on_message(message):
     split_message = message.content.split()
+    # splits the message to check for call
     sender_id = message.author.discriminator
+    #identifier number to check if bot sent the message
     if not message.author.voice:
         donothing = True
     else:
         channel = message.author.voice.channel
         voice_client = message.guild.voice_client 
-    # print(sender_id)
-    # print(split_message)
-    # print(message)
+    # Checks if the message sender is in a voice channel if it isnt sets a null and if they are sets what vc they are in to join
     if split_message[0] == 'tango!':
-        print("made to section one")
+        # if you start your message with "!tango" check these
         if split_message[1] == 'help' or split_message[1] == 'Help':
             # print("made it to section 2")
-            response = "This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel"
+            response = "*This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel*"
             await message.channel.send(response)
+        # if message says "tango! help" print this
 
         if split_message[1] == 'gif':
             print("made it to gif section")
