@@ -75,22 +75,33 @@ async def on_message(message):
         if split_message[1] == 'gif':
             search_Query = split_message[2]
             URL = "https://gfycat.com/gifs/search/" + search_Query
+            # searches the word following "gif"
             page = requests.get(URL)
             soup = BeautifulSoup(page.content, "html.parser")
+            # get page and set a html parser on the page
             img_elem = soup.find_all('img')
+            # gets all elements that are img
             ron = len(img_elem)
-            nor = random.randrange(0, ron) 
+            # puts them in an array
+            nor = random.randrange(0, ron)
+            # picks a random one from the array 
             gotten_img = img_elem[nor].get('src')
+            # gets the image
             await message.channel.send(gotten_img)
         
         if split_message[1] == 'GLaDOS':
             URL = "https://theportalwiki.com/wiki/GLaDOS_voice_lines"
             page = requests.get(URL)
             soup = BeautifulSoup(page.content, "html.parser")
+            # gets page and sets it as a html parser
             listed_quotes = soup.find_all('i')
+            # finds all elements 'i'
             quo = len(listed_quotes)
+            # puts them in an array 
             tes = random.randrange(0, quo)
+            # picks a random one
             quoted = listed_quotes[tes].text.strip()
+            # makes sure that the text isnt wonky
             await message.channel.send(quoted)
         
         if split_message[1] == 'join':
@@ -112,9 +123,12 @@ async def on_message(message):
 
             with youtube_dl.YoutubeDL(ytdl_format_options):
                 info = ytdl.extract_info(url, download=False)
+                # gets the page and does NOT download it
                 url2 = info['formats'][0]['url']
                 source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
+                # get ffmpeg audio
                 voice_client.play(source)
+                # start playing the ffmpeg audio in vc
         
         if split_message[1] == 'pause':
             if voice_client.is_playing():
@@ -135,3 +149,4 @@ async def on_message(message):
                 await message.channel.send("The bot is not playing anything at the moment.")
 
 client.run(TOKEN)
+# starts up everything with the bot token
