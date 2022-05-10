@@ -73,7 +73,6 @@ async def on_message(message):
         # if message says "tango! help" print this
 
         if split_message[1] == 'gif':
-            print("made it to gif section")
             search_Query = split_message[2]
             URL = "https://gfycat.com/gifs/search/" + search_Query
             page = requests.get(URL)
@@ -89,9 +88,7 @@ async def on_message(message):
             page = requests.get(URL)
             soup = BeautifulSoup(page.content, "html.parser")
             listed_quotes = soup.find_all('i')
-            # print(listed_quotes)
             quo = len(listed_quotes)
-            # print(quo)
             tes = random.randrange(0, quo)
             quoted = listed_quotes[tes].text.strip()
             await message.channel.send(quoted)
@@ -101,7 +98,6 @@ async def on_message(message):
                 await message.channel.send("{} is not connected to a voice channel".format(message.author.name))
                 return
             else:
-                # channel = message.author.voice.channel
                 await channel.connect()
 
         
@@ -137,10 +133,5 @@ async def on_message(message):
                 await voice_client.stop()
             else:
                 await message.channel.send("The bot is not playing anything at the moment.")
-
-    # if split_message[0] == 'Hello' or split_message[0] == 'hello' or split_message[0] == 'hi' or split_message[0] == "Hi":
-    #     if sender_id != '5559':
-    #         # print("Hello sequence!")
-    #         await message.channel.send("Hello")
 
 client.run(TOKEN)
