@@ -15,7 +15,7 @@ After this start up your environment and run **bot.py**.
 Wait a few seconds for it to connect to the discord servers.
 
 ## Usage
-After it connects to discord you should see it online in the side bar this means that it is now able to receive commands. The commands are as follows:
+After it connects to discord you should see it online in the side bar this means that it is now able to receive commands. The commands are as follows
 -tango! help
 :This brings up the help page inside discord
 -tango! gif *Search Query Here*
