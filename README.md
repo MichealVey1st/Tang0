@@ -23,12 +23,12 @@ After it connects to discord you should see it online in the side bar this means
 
 ```
 - tango! gif *Search Query Here*
-# This searches a gif from [giphycat](https://gfycat.com)
+# This searches a gif from https://gfycat.com
 ```
 
 ```
 - tango! GLaDOS
-# This says a random GLaDOS voice line from the games [Portal](https://en.wikipedia.org/wiki/Portal_(video_game))
+# This says a random GLaDOS voice line from the Portal games (https://en.wikipedia.org/wiki/Portal_(video_game))
 ```
 
 ```
