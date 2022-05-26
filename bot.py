@@ -68,7 +68,7 @@ async def on_message(message):
         # if you start your message with "!tango" check these
         if split_message[1] == 'help' or split_message[1] == 'Help':
             # print("made it to section 2")
-            response = "*This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel*"
+            response = "*This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! xkcd *Optional specific number*\"\n This prints either a random xkcd comic or a specified one\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel*"
             await message.channel.send(response)
         # if message says "tango! help" print this
 
@@ -103,6 +103,29 @@ async def on_message(message):
             quoted = listed_quotes[tes].text.strip()
             # makes sure that the text isnt wonky
             await message.channel.send(quoted)
+
+        if split_message[1] == 'xkcd':
+            if len(split_message) == 3:
+                # if message has three parts
+                URL = "https://xkcd.com/" + split_message[2]
+                page = requests.get(URL)
+                soup = BeautifulSoup(page.content, "html.parser")
+                x_img = soup.find('div', {'id' : "comic"})
+                y_img = x_img.findChildren("img", recursive=False)[0]
+                xkcd_img = y_img.get('src')
+                got_img = "https:" + xkcd_img
+                await message.channel.send(got_img)
+            else:
+                rando = random.randrange(1, 2624)
+                randod = str(rando)
+                URL = "https://xkcd.com/" + randod
+                page = requests.get(URL)
+                soup = BeautifulSoup(page.content, "html.parser")
+                x_img = soup.find('div', {'id' : "comic"})
+                y_img = x_img.findChildren("img", recursive=False)[0]
+                xkcd_img = y_img.get('src')
+                got2_img = "https:" + xkcd_img
+                await message.channel.send(got2_img)
         
         if split_message[1] == 'join':
             if not message.author.voice:

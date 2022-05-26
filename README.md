@@ -17,46 +17,50 @@ Wait a few seconds for it to connect to the discord servers.
 ## Usage
 After it connects to discord you should see it online in the side bar this means that it is now able to receive commands. The commands are as follows
 ```
-- tango! help
+tango! help
 # This brings up the help page inside discord
 ```
 
 ```
-- tango! gif *Search Query Here*
+tango! gif *Search Query Here*
 # This searches a gif from https://gfycat.com
 ```
 
 ```
-- tango! GLaDOS
+tango! GLaDOS
 # This says a random GLaDOS voice line from the Portal games (https://en.wikipedia.org/wiki/Portal_(video_game))
+```
+```
+tango! xkcd *Optional specific number*
+# This puts a https://xkcd.com comic either randomly or a specified one
 ```
 
 ```
-- tango! join
+tango! join
 # This makes the bot join a voice chat that you are in
 ```
 
 ```
-- tango! play *Youtube link here*
+tango! play *Youtube link here*
 # This plays the audio of a youtube video in the voice chat(If it doesn't work the first time try running the command again)
 ```
 
 ```
-- tango! pause
+tango! pause
 # This pauses the audio in the voice channel
 ```
 
 ```
-- tango! resume
+tango! resume
 # This resumes the audio that was paused
 ```
 
 ```
-- tango! stop
+tango! stop
 # This stops the audio entirely it cannot be resumed
 ```
 
 ```
-- tango! leave
+tango! leave
 # This makes the Bot leave the voice channel
 ```
