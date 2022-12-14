@@ -15,7 +15,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 # sets bot token to access the discord servers
 
 intents = discord.Intents().all()
-client = discord.Client()
+client = discord.Client(8)
 bot = commands.Bot(command_prefix='!',intents=intents)
 # defines the client and bots as well as set its intents to all because its a req to use if you want it in more than one server
 
@@ -68,7 +68,7 @@ async def on_message(message):
         # if you start your message with "!tango" check these
         if split_message[1] == 'help' or split_message[1] == 'Help':
             # print("made it to section 2")
-            response = "*This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! xkcd *Optional specific number*\"\n This prints either a random xkcd comic or a specified one\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel*"
+            response = "*This is the help page for the bot\n\nList of cmds:\n\"tango! help\"\nThis gets you to where you are now\n\n\"tango! gif <search query>\"\nThis searches a word and pulls a gif that matches\n\n\"tango! GLaDOS\"\nPrints out a random GLaDOS quote from the Portal games\n\n\"tango! xkcd <Optional specific number>\"\n This prints either a random xkcd comic or a specified one\"tango! join\"\nMakes the bot join the voice channel you are in\n\n\"tango! play <Youtube link>\"\nPlays the audio of the youtube video in a voice chat\n\n\"tango! pause\"\nPauses the audio in the voice chat\n\n\"tango! resume\"\nResumes the music where you paused it\n\n\"tango! stop\"\nStops the audio entirely\n\n\"tango! leave\"\nMakes the bot leave the voice channel*"
             await message.channel.send(response)
         # if message says "tango! help" print this
 
@@ -118,6 +118,7 @@ async def on_message(message):
             else:
                 rando = random.randrange(1, 2624)
                 randod = str(rando)
+                numOutput = "Comic number: "+ randod
                 URL = "https://xkcd.com/" + randod
                 page = requests.get(URL)
                 soup = BeautifulSoup(page.content, "html.parser")
@@ -126,6 +127,7 @@ async def on_message(message):
                 xkcd_img = y_img.get('src')
                 got2_img = "https:" + xkcd_img
                 await message.channel.send(got2_img)
+                await message.channel.send(numOutput)
         
         if split_message[1] == 'join':
             if not message.author.voice:
